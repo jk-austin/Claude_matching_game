@@ -1,0 +1,167 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a472a;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+    max-width: 900px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.play-again-btn {
+    background-color: #8b0000;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 10px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s;
+}
+
+.play-again-btn:hover {
+    background-color: #a00000;
+}
+
+.play-again-btn.hidden {
+    display: none;
+}
+
+.tries-counter {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+    justify-content: center;
+}
+
+.card {
+    width: 100%;
+    aspect-ratio: 2.5 / 3.5;
+    position: relative;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.card.matched {
+    cursor: default;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-face,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-back {
+    background: linear-gradient(135deg, #8b0000 0%, #a00000 100%);
+    border: 3px solid #000;
+}
+
+.card-back::before {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 85%;
+    border: 2px solid #fff;
+    border-radius: 4px;
+}
+
+.card-back::after {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 70%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 255, 0.1) 10px,
+        rgba(255, 255, 255, 0.1) 20px
+    );
+}
+
+.card-face {
+    background-color: #fff;
+    color: #000;
+    transform: rotateY(180deg);
+    border: 3px solid #000;
+}
+
+.card.matched .card-face {
+    border: 4px solid #d4af37;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+}
+
+@media (max-width: 768px) {
+    .card-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .card-face,
+    .card-back {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+    
+    .card-face,
+    .card-back {
+        font-size: 1.5rem;
+    }
+}
